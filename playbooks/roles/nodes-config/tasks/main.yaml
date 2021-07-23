@@ -8,7 +8,7 @@
     connect_timeout: 15
     timeout: "{{ node_connection_timeout }}"
 
-- name: Configure worker node
+- name: kernel configuration
   shell: rpm-ostree  kargs --append=rd.multipath=default --append=root=/dev/disk/by-label/dm-mpath-root
 
 - name: Configure node
