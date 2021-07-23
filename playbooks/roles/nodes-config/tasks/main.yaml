@@ -10,7 +10,6 @@
 
 - name: Configure worker node
   shell: rpm-ostree  kargs --append=rd.multipath=default --append=root=/dev/disk/by-label/dm-mpath-root
-  when: ansible_hostname == 'workers'
 
 - name: Configure node
   shell: |
