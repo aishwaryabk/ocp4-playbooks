@@ -9,7 +9,7 @@
     timeout: "{{ node_connection_timeout }}"
 
 - name: kernel configuration
-  shell: rpm-ostree  kargs --append=rd.multipath=default --append=root=/dev/disk/by-label/dm-mpath-root
+  shell: coreos-installer install --append-karg rd.multipath=default --append-karg root=/dev/disk/by-label/dm-mpath-root
 
 - name: Configure node
   shell: |
