@@ -9,7 +9,7 @@
     timeout: "{{ node_connection_timeout }}"
 
 - name: kernel configuration
-  shell: coreos-installer --help
+  shell: coreos.inst.rd.multipath=default
 
 - name: Configure node
   shell: |
