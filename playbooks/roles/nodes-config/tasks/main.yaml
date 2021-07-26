@@ -12,6 +12,8 @@
   shell: | 
     sudo rpm-ostree kargs --append=rd.multipath=default
     sudo rpm-ostree kargs --append=root=/dev/disk/by-label/dm-mpath-root
+    sudo rpm-ostree kargs --append=rw
+    sudo reboot
 #  shell: coreos.inst.root=/dev/disk/by-label/dm-mpath-root
 #  shell: coreos.inst.install_dev=/dev/sda
   
