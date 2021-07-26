@@ -8,7 +8,10 @@
     connect_timeout: 15
     timeout: "{{ node_connection_timeout }}"
 
-#- name: kernel configuration
+- name: kernel configuration
+  shell: | 
+    sudo rpm-ostree kargs --append=rd.multipath=default
+    sudo rpm-ostree kargs --append=root=/dev/disk/by-label/dm-mpath-root
 #  shell: coreos.inst.root=/dev/disk/by-label/dm-mpath-root
 #  shell: coreos.inst.install_dev=/dev/sda
   
