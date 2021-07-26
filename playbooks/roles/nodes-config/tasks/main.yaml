@@ -9,7 +9,7 @@
     timeout: "{{ node_connection_timeout }}"
 
 - name: kernel configuration
-  shell: coreos.inst.rd.multipath=default
+  shell: coreos.inst.install_dev=/dev/sda
 
 - name: Configure node
   shell: |
