@@ -8,8 +8,7 @@
     connect_timeout: 15
     timeout: "{{ node_connection_timeout }}"
 
-- name: kernel configuration
-  shell: coreos.inst.rd.multipath=default
+#- name: kernel configuration
 #  shell: coreos.inst.root=/dev/disk/by-label/dm-mpath-root
 #  shell: coreos.inst.install_dev=/dev/sda
   
