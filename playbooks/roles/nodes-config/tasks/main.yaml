@@ -13,13 +13,15 @@
     sudo rpm-ostree kargs --append=rd.multipath=default
     sudo rpm-ostree kargs --append=root=/dev/disk/by-label/dm-mpath-root
     sudo rpm-ostree kargs --append=rw
-    sudo reboot
+  reboot:
+    reboot_timeout: 600
+    reboot_command: sudo reboot
+#    sudo reboot
 #  shell: coreos.inst.root=/dev/disk/by-label/dm-mpath-root
 #  shell: coreos.inst.install_dev=/dev/sda
   
 - name: Reboot a slow machine that might have lots of updates to apply
-  reboot:
-    reboot_timeout: 600
+
 
 - name: Configure node
   shell: |
