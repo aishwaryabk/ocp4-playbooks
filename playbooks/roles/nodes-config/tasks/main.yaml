@@ -9,7 +9,9 @@
     timeout: "{{ node_connection_timeout }}"
 
 - name: kernel configuration
-  shell: coreos.inst.install_dev=/dev/sda
+  shell: coreos.inst.root=/dev/disk/by-label/dm-mpath-root
+#  shell: coreos.inst.install_dev=/dev/sda
+  
 
 - name: Configure node
   shell: |
