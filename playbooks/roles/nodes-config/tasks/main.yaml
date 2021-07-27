@@ -23,11 +23,22 @@
     sudo rpm-ostree kargs --append=root=/dev/disk/by-label/dm-mpath-root
     sudo rpm-ostree kargs --append=rw
     sudo reboot                               
-  
-- name: Wait for server to restart
-  local_action:
-    module: wait_for
-     host={{ inventory_hostname }}
-     port=22
-     delay=1
-     timeout=300
+
+- name: Reboot a host and wait for it to return
+  tasks:
+    - shell: shutdown -r now
+    - pause: seconds=30
+    - local_action: shell ansible -u {{ ansible_user_id }} -m ping {{ inventory_hostname }}
+      register: result
+      until: result.rc == 0
+      retries: 30
+      delay: 10
+    - shell: uptime
+    
+#- name: Wait for server to restart
+ # local_action:
+  #  module: wait_for
+   #  host={{ inventory_hostname }}
+    # port=22
+     #delay=1
+     #timeout=300
