@@ -8,14 +8,6 @@
     connect_timeout: 15
     timeout: "{{ node_connection_timeout }}"
 
- # reboot:
- #   reboot_timeout: 600
- #   reboot_command: sudo reboot
-#    sudo reboot
-#  shell: coreos.inst.root=/dev/disk/by-label/dm-mpath-root
-#  shell: coreos.inst.install_dev=/dev/sda
-  
-
 - name: Configure node
   shell: |
     if lsmod|grep -q 'ibmveth'; then
@@ -30,13 +22,7 @@
     sudo rpm-ostree kargs --append=rd.multipath=default
     sudo rpm-ostree kargs --append=root=/dev/disk/by-label/dm-mpath-root
     sudo rpm-ostree kargs --append=rw
- #   sudo reboot
-
-- name: reboot                                                              
-    at: 
-      - command=sudo reboot 
-      - count=1 
-      - units=minutes                                  
+    sudo reboot                               
 
 - name: wait for sshd on vms to resume                                      
   wait_for:                                                                 
