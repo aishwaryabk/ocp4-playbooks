@@ -17,45 +17,24 @@
       echo 'net.ipv4.ip_no_pmtu_disc = 1' | sudo tee --append /etc/sysctl.d/88-sysctl.conf > /dev/null;
     fi
 
-- name: Kernel configuration
-  when: inventory_hostname in groups['workers']
-  block:
-  - name: Pass kernel parameters
-    shell: | 
-      sudo rpm-ostree kargs --append=rd.multipath=default
-      sudo rpm-ostree kargs --append=root=/dev/disk/by-label/dm-mpath-root
-      sudo rpm-ostree kargs --append=rw
-    # sudo reboot                        
+#- name: Kernel configuration
+#  when: inventory_hostname in groups['workers']
+#  block:
+#  - name: Pass kernel parameters
+#    shell: | 
+#      sudo rpm-ostree kargs --append=rd.multipath=default
+#      sudo rpm-ostree kargs --append=root=/dev/disk/by-label/dm-mpath-root
+#      sudo rpm-ostree kargs --append=rw
+#    # sudo reboot                        
 
-  - name: Reboot the machine
-    shell: "sleep 5 && reboot"
-    async: 1
-    poll: 0
+#  - name: Reboot the machine
+#    shell: "sleep 5 && reboot"
+#    async: 1
+#    poll: 0
 
-  - name: Wait for the machine to come back online
-    wait_for_connection:
-      connect_timeout: 60
-      sleep: 5
-      delay: 5
-      timeout: 300
-      
-#- name: kernel configuration
-#  when: 
-#  shell: | 
-#    sudo rpm-ostree kargs --append=rd.multipath=default
-#    sudo rpm-ostree kargs --append=root=/dev/disk/by-label/dm-mpath-root
-#    sudo rpm-ostree kargs --append=rw
-   # sudo reboot                        
-
-#- name: Reboot the machine
-#  shell: "sleep 5 && reboot"
-#  async: 1
-#  poll: 0
-
-#- name: Wait for the machine to come back online
-#  wait_for_connection:
-#    connect_timeout: 60
-#    sleep: 5
-#    delay: 5
-#    timeout: 300
-    
+#  - name: Wait for the machine to come back online
+#    wait_for_connection:
+#      connect_timeout: 60
+#      sleep: 5
+#      delay: 5
+#      timeout: 300
