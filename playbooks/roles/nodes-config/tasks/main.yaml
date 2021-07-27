@@ -23,9 +23,11 @@
     sudo rpm-ostree kargs --append=root=/dev/disk/by-label/dm-mpath-root
     sudo rpm-ostree kargs --append=rw
     sudo reboot                               
-
-- name: wait for sshd on vms to resume                                      
-  wait_for:                                                                 
-    host: {{ inventory_hostname }}                                                    
-    port: 22                                                                
-    delay: 90  
+  
+- name: Wait for server to restart
+  local_action:
+    module: wait_for
+     host={{ inventory_hostname }}
+     port=22
+     delay=1
+     timeout=300
