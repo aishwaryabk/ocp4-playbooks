@@ -24,17 +24,18 @@
     sudo rpm-ostree kargs --append=rw
    # sudo reboot                        
 
-- name: Reboot
-#  when: 
-  block:
-  - name: wait for reboot to stop
-    shell: shutdown -r now
-    pause: seconds=30
-    retries: 30
-    delay: 10
-    shell: uptime
-      
+- name: Reboot the machine
+  shell: "sleep 5 && reboot"
+  async: 1
+  poll: 0
 
+- name: Wait for the machine to come back online
+  wait_for_connection:
+    connect_timeout: 60
+    sleep: 5
+    delay: 5
+    timeout: 300
+    
 #- name: Wait for server to restart
  # local_action:
   #  module: wait_for
