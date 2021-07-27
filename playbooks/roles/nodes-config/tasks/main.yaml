@@ -25,7 +25,6 @@
    # sudo reboot                        
 
 - name: Reboot
-  tasks:
     - shell: shutdown -r now
     - pause: seconds=30
     - local_action: shell ansible -u {{ ansible_user_id }} -m ping {{ inventory_hostname }}
