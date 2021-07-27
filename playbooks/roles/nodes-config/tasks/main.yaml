@@ -24,7 +24,7 @@
     sudo rpm-ostree kargs --append=rw
    # sudo reboot                        
 
-- name: Reboot a host and wait for it to return
+- name: Reboot
   tasks:
     - shell: shutdown -r now
     - pause: seconds=30
