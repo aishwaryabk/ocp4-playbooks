@@ -30,11 +30,16 @@
     sudo rpm-ostree kargs --append=rd.multipath=default
     sudo rpm-ostree kargs --append=root=/dev/disk/by-label/dm-mpath-root
     sudo rpm-ostree kargs --append=rw
-    sudo reboot
+ #   sudo reboot
 
-# Wait at least 30m for node connection
-- name: Check connection
-  wait_for_connection:
-    delay: 15
-    connect_timeout: 15
-    timeout: "{{ node_connection_timeout }}"
+- name: reboot                                                              
+    at: 
+      - command=sudo reboot 
+      - count=1 
+      - units=minutes                                  
+
+- name: wait for sshd on vms to resume                                      
+  wait_for:                                                                 
+    host: {{ inventory_hostname }}                                                    
+    port: 22                                                                
+    delay: 90  
