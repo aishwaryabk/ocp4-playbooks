@@ -22,7 +22,7 @@
     sudo rpm-ostree kargs --append=rd.multipath=default
     sudo rpm-ostree kargs --append=root=/dev/disk/by-label/dm-mpath-root
     sudo rpm-ostree kargs --append=rw
-   # sudo reboot                               
+   # sudo reboot                        
 
 - name: Reboot a host and wait for it to return
   tasks:
